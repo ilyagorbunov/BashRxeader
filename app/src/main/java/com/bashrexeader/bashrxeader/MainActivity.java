@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Action1;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,32 +13,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myObservable.subscribe(mySubcriber);
+        myObservable.subscribe(onNextAction);
     }
 
-    Observable<String> myObservable = Observable.create(
-            new Observable.OnSubscribe<String>() {
-                @Override
-                public void call(Subscriber<? super String> subscriber) {
-                    subscriber.onNext("text");
-                    subscriber.onCompleted();
-                }
-            }
-    );
+    Observable<String> myObservable = Observable.just("text!");
 
-    Subscriber<String> mySubcriber = new Subscriber<String>() {
+    Action1<String> onNextAction = new Action1<String>() {
         @Override
-        public void onCompleted() {
-
-        }
-
-        @Override
-        public void onError(Throwable e) {
-
-        }
-
-        @Override
-        public void onNext(String s) {
+        public void call(String s) {
             System.out.println(s);
         }
     };
