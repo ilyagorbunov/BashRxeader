@@ -13,16 +13,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myObservable.subscribe(onNextAction);
+        Observable.just("Text")
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        System.out.println(s);
+                    }
+                });
     }
 
-    Observable<String> myObservable = Observable.just("text!");
 
-    Action1<String> onNextAction = new Action1<String>() {
-        @Override
-        public void call(String s) {
-            System.out.println(s);
-        }
-    };
+
+
+
 
 }
