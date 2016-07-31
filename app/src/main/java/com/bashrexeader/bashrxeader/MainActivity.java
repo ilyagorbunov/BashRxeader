@@ -6,7 +6,6 @@ import android.os.Bundle;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
-import rx.functions.Func1;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,12 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Observable.just("Text")
-                .map(new Func1<String, String>() {
-                    @Override
-                    public String call(String s) {
-                        return s + " -Owner";
-                    }
-                })
+                .map(s -> s + " -Owner")
                 .subscribe(s -> System.out.println(s));
     }
 
