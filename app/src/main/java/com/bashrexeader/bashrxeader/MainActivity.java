@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Observable.just("Text")
                 .map(s -> s + " -Owner")
+                .map(s -> s.hashCode())
+                .map(i -> Integer.toString(i))
                 .subscribe(s -> System.out.println(s));
     }
 
